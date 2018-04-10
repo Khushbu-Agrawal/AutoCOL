@@ -40,6 +40,9 @@ namespace AutoCOL.src.PageObjects
         {
             try
             {
+                WebDriverWait wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
+                wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[contains(text(),'MY ACCOUNT')]")));
+
                 return (driver.Url.ToUpper() == PAGE_URL.ToUpper());
             }
 
@@ -47,8 +50,6 @@ namespace AutoCOL.src.PageObjects
             {
                 return LogError("Exception caught while performing VerifyPage(),Error: " + ex.ToString());
             }
-
-
         }
 
         //Verify whether My Profile Email Id is correct or not
@@ -66,16 +67,13 @@ namespace AutoCOL.src.PageObjects
 
                 return (email == p_EmailId);
             }
-
             catch (Exception ex)
             {
                 return LogError("Exception caught while performing VerifyMyProfileEmail(),Error: " + ex.ToString());
             }
-            
         }
 
         //Click on Logout button
-
         public bool ClickLogout()
         {
             try
@@ -88,12 +86,11 @@ namespace AutoCOL.src.PageObjects
                 logout.Click();
                 return true;
             }
-
             catch (Exception ex)
             {
                 return LogError("Exception occurs while performing ClickLogout(), error: " + ex.ToString());
             }
-
         }
+
     }
 }

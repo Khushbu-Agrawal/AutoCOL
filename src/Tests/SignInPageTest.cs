@@ -88,8 +88,8 @@ namespace AutoCOL.src.Tests
             Assert.IsTrue(signInSuccessPage.ClickMyAccount(), "SignInSuccessPage ClickMyAccount() FAILED");
 
             MyProfilePage myProfilePage = new MyProfilePage(driver);
-
-            Assert.IsTrue(myProfilePage.VerifyMyProfileEmail(signInData.userName), "MyProfliPage VerifyProfilePage() FAILED");
+            Assert.IsTrue(myProfilePage.VerifyPage(), "MyProfilePage VerifyPage() FAILED");
+            Assert.IsTrue(myProfilePage.VerifyMyProfileEmail(signInData.userName), "MyProfilePage VerifyProfilePage() FAILED");
         }
 
     }

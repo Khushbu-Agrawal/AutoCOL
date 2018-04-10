@@ -56,6 +56,7 @@ namespace AutoCOL.src.PageObjects
 
                 List<string> handles = driver.WindowHandles.ToList();
 
+                // If Facebook login window appears, lets close it so that we can enter credentials manually for testing.
                 if (handles.Count > 1)
                 {
                     driver.SwitchTo().Window(handles[1]);

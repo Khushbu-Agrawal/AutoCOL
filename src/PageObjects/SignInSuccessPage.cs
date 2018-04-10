@@ -33,6 +33,9 @@ namespace AutoCOL.src.PageObjects
         {
             try
             {
+                WebDriverWait wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
+                wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[contains(text(),'MY ACCOUNT')]")));
+
                 return (driver.Url.ToUpper() == PAGE_URL.ToUpper());
             }
             catch (Exception ex)
