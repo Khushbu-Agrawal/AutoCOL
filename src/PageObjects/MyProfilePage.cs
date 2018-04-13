@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -16,7 +16,7 @@ namespace AutoCOL.src.PageObjects
 {
     class MyProfilePage : BasePageObject
     {
-        //Constants
+        // Constants
         private const String PAGE_URL = "https://shop.circles.life/my_profile";
 
         [FindsBy(How = How.XPath, Using = "//div[contains(text(),'MY ACCOUNT')]")]
@@ -28,31 +28,31 @@ namespace AutoCOL.src.PageObjects
         [FindsBy(How = How.XPath, Using = "//*[@id=\"st-container\"]/div/div/div[1]/div/div/div[2]/div/a[6]/div")]
         private IWebElement logout;
 
-        //Constructor
+        // Constructor
         public MyProfilePage(IWebDriver p_Driver)
         {
             driver = p_Driver;
             PageFactory.InitElements(driver, this);
         }
 
-        //Verify whether its a My Profile page or not
+        // Verify whether its a My Profile page or not
         public bool VerifyPage()
         {
             try
             {
                 WebDriverWait wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
                 wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[contains(text(),'MY ACCOUNT')]")));
+                Thread.Sleep(3000);
 
                 return (driver.Url.ToUpper() == PAGE_URL.ToUpper());
             }
-
             catch (Exception ex)
             {
                 return LogError("Exception caught while performing VerifyPage(),Error: " + ex.ToString());
             }
         }
 
-        //Verify whether My Profile Email Id is correct or not
+        // Verify whether My Profile Email Id is correct or not
         public bool VerifyMyProfileEmail(String p_EmailId)
         {
             String email = null;
@@ -73,7 +73,7 @@ namespace AutoCOL.src.PageObjects
             }
         }
 
-        //Click on Logout button
+        // Click on Logout button
         public bool ClickLogout()
         {
             try
@@ -86,6 +86,7 @@ namespace AutoCOL.src.PageObjects
                 logout.Click();
                 return true;
             }
+
             catch (Exception ex)
             {
                 return LogError("Exception occurs while performing ClickLogout(), error: " + ex.ToString());

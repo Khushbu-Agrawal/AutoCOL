@@ -25,23 +25,31 @@ namespace AutoCOL.src.Tests
         // @todo - add other supporting browsers.
 
         // Returns driver instance
-        public IWebDriver InitDriver()
+        public IWebDriver InitDriver(String p_Url)
         {
             IWebDriver driver = null;
             switch(TestConfig.browser)
             {
                 case CHROME:
-                    ChromeOptions options = new ChromeOptions();
-                    //options.AddArgument("-incognito");
-                    options.AddArgument("--disable-popup-blocking");
-                    
-                    DesiredCapabilities capabilities = DesiredCapabilities.Chrome();    
-                    capabilities.SetCapability(ChromeOptions.Capability, options);
-                    driver = new ChromeDriver(options);
+                    {
+                        ChromeOptions options = new ChromeOptions();
+                        options.AddArgument("--disable-popup-blocking");
+                        options.AddArgument("--disable-notifications");
+
+                        DesiredCapabilities capabilities = DesiredCapabilities.Chrome();
+                        capabilities.SetCapability(ChromeOptions.Capability, options);
+                        driver = new ChromeDriver(options);
+                    }
 
                     break;
                 case FIREFOX:
-                    driver = new FirefoxDriver();
+                    {
+                        FirefoxOptions options = new FirefoxOptions();
+                        options.AddArgument("--disable-popup-blocking");
+                        options.AddArgument("--disable-notifications");
+
+                        driver = new FirefoxDriver(options);
+                    }
                     break;
                 default:
                     Console.WriteLine("Error: Unknown browser detected !!!");
@@ -49,7 +57,7 @@ namespace AutoCOL.src.Tests
             }
 
             driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl(TestConfig.url);
+            driver.Navigate().GoToUrl(p_Url);
 
             return driver;
         }

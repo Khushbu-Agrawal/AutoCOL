@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Threading;
 
 using OpenQA.Selenium;
@@ -17,28 +16,26 @@ namespace AutoCOL.src.PageObjects
 {
     class HomePage : BasePageObject
     {
-
-        //Constants
+        // Constants
         private const String PAGE_TITLE = "Circles.Life | Unlimit your telco. Now.";
 
         [FindsBy(How = How.XPath, Using = "//a[contains(text(),'Sign up')]")]
         private IWebElement signUp;
 
-        //Constructor
+        // Constructor
         public HomePage(IWebDriver p_Driver)
         {
             driver = p_Driver;
             PageFactory.InitElements(driver, this);
         }
 
-        //Verify whether its a home page or not
+        // Verify whether its a home page or not
         public bool VerifyPage()
         {
             try
             {
                 return (driver.Title.ToUpper() == PAGE_TITLE.ToUpper());
             }
-
             catch (Exception ex)
             {
                 return LogError("Exception caught while performing VerifyPage(),Error: " + ex.ToString());
@@ -49,14 +46,15 @@ namespace AutoCOL.src.PageObjects
         {
             try
             {
+                Thread.Sleep(1000);
                 signUp.Click();
+
                 //Store the parent window handle
-                Thread.Sleep(100);
+                Thread.Sleep(1000);
                 String parentWindowHandle=driver.CurrentWindowHandle;
 
+                // Try to close secondry popup window
                 List<string> handles = driver.WindowHandles.ToList();
-
-                // If Facebook login window appears, lets close it so that we can enter credentials manually for testing.
                 if (handles.Count > 1)
                 {
                     driver.SwitchTo().Window(handles[1]);
@@ -72,7 +70,6 @@ namespace AutoCOL.src.PageObjects
             }
 
             return null;
-
         }
     }
 }

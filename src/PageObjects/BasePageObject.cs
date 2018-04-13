@@ -10,16 +10,16 @@ using OpenQA.Selenium.Support.UI;
 
 namespace AutoCOL.src.PageObjects
 {
-    //BasePageObject class to serve all the derived PageObject classes
+    // BasePageObject class to serve all the derived PageObject classes
     class BasePageObject
     {
         //Constants
         private const String ERROR_PREFIX_STR = "Error: ";
 
-        //Class Data
+        // Class Data
         protected IWebDriver driver;
 
-        //Helper functions log error and return false
+        // Helper functions log error and return false
         public bool LogError(String p_ErrorString)
         {
             Console.WriteLine(ERROR_PREFIX_STR + p_ErrorString);

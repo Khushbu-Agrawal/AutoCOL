@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -15,20 +15,20 @@ namespace AutoCOL.src.PageObjects
 {
     class SignInSuccessPage : BasePageObject
     {
-        //Constants
+        // Constants
         private const String PAGE_URL = "https://shop.circles.life/plan";
      
         [FindsBy(How = How.XPath, Using = "//div[contains(text(),'MY ACCOUNT')]")]
         private IWebElement myAccount;
 
-        //Constructor
+        // Constructor
         public SignInSuccessPage(IWebDriver p_Driver)
         {
             driver = p_Driver;
             PageFactory.InitElements(driver, this);
         }
 
-        //Verify whether its a Sign In Success page or not
+        // Verify whether its a Sign In Success page or not
         public bool VerifyPage()
         {
             try
@@ -36,6 +36,7 @@ namespace AutoCOL.src.PageObjects
                 WebDriverWait wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
                 wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[contains(text(),'MY ACCOUNT')]")));
 
+                Thread.Sleep(3000);
                 return (driver.Url.ToUpper() == PAGE_URL.ToUpper());
             }
             catch (Exception ex)
@@ -43,8 +44,6 @@ namespace AutoCOL.src.PageObjects
                 return LogError("Exception caught while performing VerifyPage(),Error: " + ex.ToString());
             }
         }
-
-        //Click on MY ACCOUNT Link in SignIn Success Page
 
         public bool ClickMyAccount()
         {

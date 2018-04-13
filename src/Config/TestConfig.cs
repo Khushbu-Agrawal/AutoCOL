@@ -16,7 +16,8 @@ namespace AutoCOL.src.Config
 
         // Test configuration default values (will be overrider by the config file contents at runtime)
         public static String browser = "Chrome";
-        public static String url = "https://pages.circles.life/";
+        public static String colUrl = "https://pages.circles.life/";
+        public static String fbUrl = "https://www.facebook.com/";
         private static bool isLoaded = false;
 
         // Constructor
@@ -43,7 +44,8 @@ namespace AutoCOL.src.Config
                 var jObject = JObject.Parse(json);
                 if (jObject == null) return;
 
-                url = jObject["URL"].ToString();
+                colUrl = jObject["COL_URL"].ToString();
+                fbUrl = jObject["FB_URL"].ToString();
                 browser = jObject["Browser"].ToString();
 
                 // Testing only

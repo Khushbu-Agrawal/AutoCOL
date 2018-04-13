@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -16,7 +16,7 @@ namespace AutoCOL.src.PageObjects
 {
     class SignInPage : BasePageObject
     {
-        //Constants
+        // Constants
         private const String PAGE_TITLE = "Unlimit your telco. Now.";
 
         private const String PAGE_URL = "https://shop.circles.life/login?auto_facebook_login=true";
@@ -31,7 +31,7 @@ namespace AutoCOL.src.PageObjects
         private IWebElement signIn;
 
 
-        //Constructor
+        // Constructor
         public SignInPage(IWebDriver p_Driver)
         {
             driver = p_Driver;
@@ -46,22 +46,20 @@ namespace AutoCOL.src.PageObjects
             {
                 return (driver.Title.ToUpper() == PAGE_TITLE.ToUpper());
             }
-
             catch (Exception ex)
             {
                 return LogError("Exception caught while performing VerifyPage(),Error: " + ex.ToString());
             }
-
-
         }
          
          */
 
-        //Verify whether its a Sign In page or not
+        // Verify whether its a Sign In page or not
         public bool VerifyPage()
         {
             try
             {
+                Thread.Sleep(1000);
                 return (driver.Url.ToUpper() == PAGE_URL.ToUpper());
             }
 
@@ -94,7 +92,7 @@ namespace AutoCOL.src.PageObjects
             return true;
         }
 
-        //Get Email Address in SignIn Page
+        // Get Email Address in SignIn Page
         public String GetUserName()
         {
             String username = null;
@@ -119,7 +117,7 @@ namespace AutoCOL.src.PageObjects
             return username;
         }
 
-        //Get Password in SignIn Page
+        // Get Password in SignIn Page
         public String GetPassword()
         {
             String password = null;
@@ -143,7 +141,7 @@ namespace AutoCOL.src.PageObjects
         }
 
 
-        //Input Password in SignIn Page
+        // Input Password in SignIn Page
         public bool SetPassword(String p_Password)
         {
             try
@@ -165,7 +163,7 @@ namespace AutoCOL.src.PageObjects
             return true;
         }
 
-        //Click on Sign In button
+        // Click on Sign In button
         public bool ClickSignIn()
         {
             try

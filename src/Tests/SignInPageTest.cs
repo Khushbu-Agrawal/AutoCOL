@@ -15,7 +15,7 @@ using OpenQA.Selenium.Support.UI;
 
 using AutoCOL.src.PageObjects;
 using AutoCOL.src.TestData;
-
+using AutoCOL.src.Config;
 
 namespace AutoCOL.src.Tests
 {
@@ -31,7 +31,7 @@ namespace AutoCOL.src.Tests
         [TestInitialize]
         public void TestInit()
         {
-            driver = InitDriver(); // Setup driver
+            driver = InitDriver(TestConfig.colUrl); // Setup driver
         }
 
         [TestCleanup]
@@ -70,7 +70,6 @@ namespace AutoCOL.src.Tests
             return signInPage;
         }
 
-
         [TestMethod]
         public void TestSignIn()
         {
@@ -84,12 +83,12 @@ namespace AutoCOL.src.Tests
             //Verify SignInSuccessPage is loaded
             SignInSuccessPage signInSuccessPage = new SignInSuccessPage(driver);
             Assert.IsTrue(signInSuccessPage.VerifyPage(), "SignInSuccessPage VerifyPage() FAILED");
-
             Assert.IsTrue(signInSuccessPage.ClickMyAccount(), "SignInSuccessPage ClickMyAccount() FAILED");
 
+            // Verify profile email
             MyProfilePage myProfilePage = new MyProfilePage(driver);
             Assert.IsTrue(myProfilePage.VerifyPage(), "MyProfilePage VerifyPage() FAILED");
-            Assert.IsTrue(myProfilePage.VerifyMyProfileEmail(signInData.userName), "MyProfilePage VerifyProfilePage() FAILED");
+            Assert.IsTrue(myProfilePage.VerifyMyProfileEmail(signInData.userName), "MyProfliPage VerifyProfilePage() FAILED");
         }
 
     }
