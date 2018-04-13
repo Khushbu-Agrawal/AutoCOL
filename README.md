@@ -40,6 +40,30 @@ Set environment variable with name 'COLTestConfigFilePath' and point it to a jso
 }
 ```
 A sample of this this file is avaible in TestData/Config.json file.
+
+#### COLTestDataFolder
+Set environment variable with name 'COLTestDataFolder' and point it to a folder which contains all the test data files for each web page test cases.
+Each Web page will have 1 or more test cases, all test data pertaining to a web page is stored in a single separate json file.
+Below is the sample json structure for test data for SignIn page.
+```
+{
+	"TestSignIn":
+	{
+		"UserName": "autotestcol2018@gmail.com",
+		"Password": "autotestcol2018"
+	}
+}
+```
+A sample of this this file is avaible in TestData/SignIn.json already.
+
+## Running the tests
+
+Run tests using MsTest.exe on DOS prompt which provides detailed test report.
+```
+C:\Users\khushbu>mstest.exe /testcontainer:MapsynqAutomation.dll /resultsfile:TestResult.trx
+Microsoft (R) Test Execution Command Line Tool Version 12.0.21005.1
+Copyright (c) Microsoft Corporation. All rights reserved.
+
 Loading AutoCOL.dll...
 Starting execution...
 
