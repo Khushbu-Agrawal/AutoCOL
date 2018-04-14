@@ -20,6 +20,9 @@ namespace AutoCOL.src.PageObjects
         [FindsBy(How = How.XPath, Using = "//a[contains(text(),'Home')]")]
         private IWebElement home;
 
+        [FindsBy(How = How.XPath, Using = "//textarea[@name='xhpc_message']")]
+        private IWebElement status;
+ 
         private String commentText = "Sample comment";
 
         // Constructor
@@ -50,18 +53,18 @@ namespace AutoCOL.src.PageObjects
                 home.Click();
                 Thread.Sleep(3000);
 
-                // Write post message
-                IWebElement status = driver.FindElement(By.XPath("//textarea[@name='xhpc_message']"));
+                // Write post message                  
                 status.SendKeys(commentText);
                 Thread.Sleep(3000);
 
                 // Post comment
                 WebDriverWait wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
                 wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[text()='Post']"))).Click();
+                Thread.Sleep(3000);
             }
             catch (Exception ex)
             {
-                return LogError("Ex ception occurs while performing PostComment(), error: " + ex.ToString());
+                return LogError("Exception occurs while performing PostComment(), error: " + ex.ToString());
             }
 
             return true;
